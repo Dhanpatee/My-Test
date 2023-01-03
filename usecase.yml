@@ -1,0 +1,22 @@
+---
+- name: task for apache groups
+  hosts: apache-server
+  become: true
+  tasks:
+    - name: install apache2 on apache-server groups
+      apt: name=apache2 update_cache=yes state=latest
+    - name: copy the cutome page
+      copy: src=/home/azureuser/apache-server/index.html dest=/var/www/html/index.html
+    - name: jave install on apache-server group
+      apt: name=openjdk-11-jdk update_cache=yes state=latest
+
+- name: task for nginx group
+  hosts: nginx-server
+  become: true
+  tasks:
+    - name: install nginx on nginx-server group
+      apt: name=nginx update_cache=yes state=latest
+    - name: copy the custome page
+      copy: src=/home/azureuser/nginx-server/index.html dest=/var/www/html/index.html
+    - name: my-sql install on nginx-server group
+      apt: name=mysql-server update_cache=yes state=latest
